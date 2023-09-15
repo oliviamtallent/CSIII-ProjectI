@@ -1,0 +1,17 @@
+#BlueJ class context
+comment0.target=GravityActor
+comment1.params=
+comment1.target=GravityActor()
+comment2.params=
+comment2.target=void\ act()
+comment3.params=
+comment3.target=boolean\ isBlocked()
+comment4.params=y1\ y2
+comment4.target=boolean\ isBlockedTop(int,\ int)
+comment5.params=direction
+comment5.target=void\ startJump(java.lang.String)
+comment6.params=
+comment6.target=boolean\ isFalling()
+comment7.params=
+comment7.target=boolean\ isJumping()
+numComments=8
