@@ -1,6 +1,6 @@
 import mayflower.*;
 
-public class ExtraRunner 
+public class ProjectIRunner 
 {
     public static void main(String[] args) 
     {
