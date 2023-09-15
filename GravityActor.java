@@ -6,7 +6,7 @@ public class GravityActor extends Actor {
     private int jumpStartX; // normalize x to 0
     private int jumpStartY;
     private int x;
-    private int ARC = 10; // vertex
+    private int ARC = 10; // vertex of jump
     private int a;
     private boolean offTop;
     private int prevY = 0;
