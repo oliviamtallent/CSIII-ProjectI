@@ -85,7 +85,20 @@ public class Cat extends MoveableAnimatedActor {
         setJumpLeftAnimation(jumpLeftAnimation);
     }
     
-    public void act() {
+    public void act() 
+    {
         super.act();
+    }
+    
+    public void scaleLevel3Cat(int scaleX2, int scaleY2)
+    {
+        walkRightAnimation.scale(scaleX2, scaleY2);
+        idleAnimation.scale(scaleX2, scaleY2);
+        idleLeftAnimation.scale(scaleX2, scaleY2);
+        walkLeftAnimation.scale(scaleX2, scaleY2);
+        fallAnimation.scale(scaleX2, scaleY2);
+        fallLeftAnimation.scale(scaleX2, scaleY2);
+        jumpAnimation.scale(scaleX2, scaleY2);
+        jumpLeftAnimation.scale(scaleX2, scaleY2);
     }
 }

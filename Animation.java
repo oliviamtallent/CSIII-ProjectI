@@ -5,9 +5,9 @@ public class Animation {
     private int frameRate;
     private int currentFrame;
     
-    public Animation(int frameRate, String[] imgFiles) {
+    public Animation(int frameRate, String[] imgFiles) 
+    {
         this.frameRate = frameRate;
-        
         frames = new MayflowerImage[imgFiles.length];
         for (int i = 0; i < imgFiles.length; i++) {
             frames[i] = new MayflowerImage(imgFiles[i]);

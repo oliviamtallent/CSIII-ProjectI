@@ -4,4 +4,6 @@ comment1.params=
 comment1.target=Cat()
 comment2.params=
 comment2.target=void\ act()
-numComments=3
+comment3.params=scaleX2\ scaleY2
+comment3.target=void\ scaleLevel3Cat(int,\ int)
+numComments=4
