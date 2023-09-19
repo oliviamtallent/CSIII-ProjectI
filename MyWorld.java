@@ -3,9 +3,6 @@ import mayflower.*;
 
 public class MyWorld extends World {
     private Cat cat;
-    private DogAnimatedActor dog;
-    private JackAnimatedActor jack;
-    private NinjaAnimatedActor ninja;
     private int[][] mazeGrid = {
         {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
         {1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
@@ -44,14 +41,14 @@ public class MyWorld extends World {
     
     public MyWorld() 
     {
-        setBackground("img/BG/BG.png");
+        setBackground("img/BG/grocery.png");
         
         offsetX = (800 - (mazeGrid[0].length * 16)) / 2;
         offsetY = 560 - (mazeGrid.length * 16);
         for (int r = 0; r < mazeGrid.length; r++) {
             for (int c = 0; c < mazeGrid[r].length; c++) {
                 if (mazeGrid[r][c] == 1) {
-                    Block b = new Block(2);
+                    Aisle b = new Aisle();
                     addObject(b, offsetX + c * 16, offsetY + r * 16);
                 }
             }
