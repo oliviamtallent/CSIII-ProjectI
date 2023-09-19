@@ -68,6 +68,13 @@ public class MyWorld extends World {
             }
         }
         
+        // random generate enemy
+        int[][] enemys = {{2, 22, 25}};
+        for (int i = 0; i < enemys.length; i++) {
+            MazeEnemy item = new MazeEnemy(.04, enemys[i][0]);
+            addObject(item, offsetX + enemys[i][1] * 16, offsetY + enemys[i][2] * 16);
+        }
+        
         cat = new Cat();
         addObject(cat, 20 * 16, 0 * 16);
     }
