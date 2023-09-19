@@ -6,6 +6,8 @@ public class GravityActor extends Actor {
     private int jumpStartX; // normalize x to 0
     private int jumpStartY;
     private int x;
+    private int yGoal;
+    private int y;
     private int ARC = 10; // vertex of jump
     private int a;
     private boolean offTop;
@@ -16,25 +18,55 @@ public class GravityActor extends Actor {
     
     public void act() {  
         if (isJumping) {
-            int y;
-            if (a == 0)
-                y = (x * x) - (ARC * x);
-            else {
-                y = (x * x) - (2 * a * x) - (a * (ARC - (2 * a)));  
-            }
-            System.out.println("(" + x + ", " + y + ", " + a + ")");
-            int moveX = 0;
-            if (direction == "left")
-                moveX = -1;
-            else
-                moveX = 1;
-            
-            setLocation(getX() + moveX, y + jumpStartY);
-            
-            if (isBlockedTop(prevY, y) && a == 0) {
-                a = x;
-                if (a > 30)
+            if (y == yGoal) {
+                // if jump has full arc (not vertically constrained)
+                if (a == 0)
+                    yGoal = (x * x) - (ARC * x);
+                else {
+                    yGoal = (x * x) - (2 * a * x) - (a * (ARC - (2 * a)));  
+                }
+                System.out.println(y + " " + yGoal);
+                
+                // increment x
+                int moveX = 0;
+                if (direction == "left")
+                    moveX = -1;
+                else
+                    moveX = 1;
+                
+                setLocation(getX() + moveX, y + jumpStartY);
+                
+                if (direction == "left")
+                   x--;
+                else
+                   x++;
+                   
+                if(getBlockedDirection() == Direction.Down && x != 0 && prevY != 0) {
+                    System.out.println(x);
                     isJumping = false;
+                }
+                prevY = y;
+            } else {
+                if (y < yGoal)
+                    y++;
+                else
+                    y--;
+                setLocation(getX(), y + jumpStartY);
+            }
+        } else {
+            int fallSpeed = 3;
+            setLocation(getX(), getY() + fallSpeed);
+            for (int i = 0; i < fallSpeed; i++) {
+                if (isBlocked()) {
+                    setLocation(getX(), getY() - 1);
+                }
+            }
+        }
+        /*
+        if (isBlockedTop(prevY, y) && a == 0) {
+            a = x;
+            if (a > 30)
+                isJumping = false;
             } else if (isBlocked()) {
                 if (a == 0 || offTop) {
                     while (isBlocked()) {
@@ -45,23 +77,9 @@ public class GravityActor extends Actor {
                     prevY = 0;
                 }
             }
-            if (!isBlockedTop(prevY, y) && a != 0) {
-                offTop = true;
-            }
-            if (direction == "left")
-               x--;
-            else
-               x++;
-            prevY = y;
-        } else {
-            int fallSpeed = 3;
-            setLocation(getX(), getY() + fallSpeed);
-            for (int i = 0; i < fallSpeed; i++) {
-                if (isBlocked()) {
-                    setLocation(getX(), getY() - 1);
-                }
-            }
-        }
+        if (!isBlockedTop(prevY, y) && a != 0) {
+            offTop = true;
+        }*/
     }
     
     public boolean isBlocked() {
@@ -95,6 +113,8 @@ public class GravityActor extends Actor {
         a = 0;
         offTop = false;
         prevY = 0;
+        yGoal = 0;
+        y = 0;
         isJumping = true;
     }
     
@@ -119,5 +139,14 @@ public class GravityActor extends Actor {
         }
         
         return isJumping;
+    }
+    
+    public Direction getBlockedDirection() {
+        setLocation(getX(), getY() - 1);
+        if (!isBlocked()) {
+            setLocation(getX(), getY() + 1);
+            return Direction.Down;
+        }
+        return Direction.Left;
     }
 }

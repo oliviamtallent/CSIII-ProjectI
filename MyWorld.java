@@ -3,9 +3,6 @@ import mayflower.*;
 
 public class MyWorld extends World {
     private Cat cat;
-    private DogAnimatedActor dog;
-    private JackAnimatedActor jack;
-    private NinjaAnimatedActor ninja;
     private int[][] mazeGrid = {
         {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
         {1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
@@ -54,6 +51,20 @@ public class MyWorld extends World {
                     Block b = new Block(2);
                     addObject(b, offsetX + c * 16, offsetY + r * 16);
                 }
+            }
+        }
+        
+        // put objects randomly
+        String[] objects = {"Mushroom_1", "Mushroom_1", "Mushroom_1", "Mushroom_1"};
+        for (String obj : objects) {
+            while (true) {
+               int y = (int) (Math.random() * mazeGrid.length);
+               int x = (int) (Math.random() * mazeGrid[0].length);
+               if (mazeGrid[y][x] == 0) {
+                   Collectable item = new Collectable(obj);
+                   addObject(item, offsetX + x * 16, offsetY + y * 16);
+                   break;
+               }
             }
         }
         
