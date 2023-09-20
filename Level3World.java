@@ -4,9 +4,10 @@ public class Level3World extends World
     private Cat cat;
     private DogAnimatedActor dog;
     private JackAnimatedActor jack;
-    private NinjaAnimatedActor ninja;
+    private NinjaAnimatedActor ninjaHazard1;
     private Strawberry edgeStrawberry;
-    
+    private Strawberry strawberry1;  
+    private NinjaAnimatedActor ninjaHazard2;
     public Level3World() 
     {
         setBackground("img/BG/strawberryFieldCopy.jpeg");
@@ -35,14 +36,22 @@ public class Level3World extends World
         Level3Block b10 = new Level3Block(2);
         addObject(b10, 700, 500);
         
-        Level3Block b7 = new Level3Block(13);
-        addObject(b7, 174, 160); 
+        // Level3Block b7 = new Level3Block(13);
+        // addObject(b7, 174, 100); //160
         
-        Level3Block b8 = new Level3Block(14);
-        addObject(b8, 302, 160); // straw
+        //Level3Block b8 = new Level3Block(14);
+        //addObject(b8, 302, 200); // straw
         
-        Level3Block b9 = new Level3Block(15);
-        addObject(b9, 430, 160);
+        // Level3Block block1 = new Level3Block(14);
+        // addObject(block1, 102, 300); // straw
+        
+        //Level3Block block2 = new Level3Block(14);
+        //addObject(block2, 202, 200); // straw
+        
+ 
+        
+        // Level3Block b9 = new Level3Block(15);
+        // addObject(b9, 430, 100);
         
         cat = new Cat();
         // cat.scale(0.8);
@@ -51,7 +60,7 @@ public class Level3World extends World
         Mayflower.showBounds(true);
         
         edgeStrawberry = new Strawberry();
-        addObject(edgeStrawberry, 450, 450);
+        addObject(edgeStrawberry, 450, 450); // ninja here instead
         
         /*
         dog = new DogAnimatedActor();
@@ -60,12 +69,31 @@ public class Level3World extends World
         jack = new JackAnimatedActor();
         addObject(jack, 500, 100);
         */
-        ninja = new NinjaAnimatedActor();
-        addObject(ninja, 200, 300); 
+       
+        ninjaHazard1 = new NinjaAnimatedActor();
+        addObject(ninjaHazard1, 300, 300); 
+        
+        strawberry1 = new Strawberry();
+        addObject(strawberry1, 550, 450);
+        
+        ninjaHazard2 = new NinjaAnimatedActor();
+        addObject(ninjaHazard2, 650, 300); // strawberry here instead
+    
+        
     }
     
     public void act()
     {
-        
+      
+    }
+    
+    public NinjaAnimatedActor getNinja1()
+    {
+        return ninjaHazard1;
+    }
+    
+    public NinjaAnimatedActor getNinja2()
+    {
+        return ninjaHazard2;
     }
 }

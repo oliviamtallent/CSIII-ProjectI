@@ -13,7 +13,7 @@ public class Cat extends MoveableAnimatedActor {
     private int scaleY;
   
     public Cat() {
-        scaleY = 28;
+        scaleY = 100;
         scaleX = (int) (scaleY/100.0*87);
         String[] imgFiles = new String[10];
         for (int i = 0; i < imgFiles.length; i++) {
@@ -88,6 +88,26 @@ public class Cat extends MoveableAnimatedActor {
     public void act() 
     {
         super.act();
+        if(isTouching(NinjaAnimatedActor.class))
+        {
+            World world = getWorld();
+            world.removeObject(this);
+        }
+       
+        int x = getX();
+        int y = getY();
+        
+        Level3World world = (Level3World) getWorld();
+        if(world != null)
+        {
+            int ninja1X = world.getNinja1().getX();
+            int ninja1Y = world.getNinja1().getY();
+            
+            if(x >= ninja1X && y <= ninja1Y)
+            {
+                world.removeObject(world.getNinja1());
+            }
+        }   
     }
     
     public void scaleLevel3Cat(int scaleX2, int scaleY2)

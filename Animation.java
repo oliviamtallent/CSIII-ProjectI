@@ -12,7 +12,7 @@ public class Animation {
         for (int i = 0; i < imgFiles.length; i++) {
             frames[i] = new MayflowerImage(imgFiles[i]);
         }
-    }
+    } 
     
     public int getFrameRate() {
         return frameRate;

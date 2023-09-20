@@ -1,4 +1,6 @@
-public class NinjaAnimatedActor extends AnimatedActor {
+import mayflower.*;
+public class NinjaAnimatedActor extends AnimatedActor 
+{
     private Animation animation;
     
     public NinjaAnimatedActor() 
@@ -10,7 +12,7 @@ public class NinjaAnimatedActor extends AnimatedActor {
         }
         
         animation = new Animation(50, imgFiles);
-        animation.scale(.19);
+        animation.scale(.15);
         animation.setTransparency(5);
         setAnimation(animation);
     }
@@ -18,5 +20,6 @@ public class NinjaAnimatedActor extends AnimatedActor {
     public void act() 
     {
         super.act();
+       
     }
 }

@@ -1,7 +1,8 @@
 import mayflower.*;
 
 
-public class MyWorld extends World {
+public class MyWorld extends World 
+{
     private Cat cat;
     private DogAnimatedActor dog;
     private JackAnimatedActor jack;
