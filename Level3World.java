@@ -10,6 +10,8 @@ public class Level3World extends World
     public Level3World() 
     {
         setBackground("img/BG/strawberryFieldCopy.jpeg");
+        InventoryBackground invBg = new InventoryBackground();
+        addObject(invBg, 0, 0);
         
         Block b = new Block(2, 100);
         addObject(b, 0, 500);

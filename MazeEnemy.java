@@ -5,6 +5,7 @@ public class MazeEnemy extends EnemyAnimatedActor {
     private boolean isUp;
     private double add;
     private int direction;
+    private Timer cooldown;
     
     public MazeEnemy(double scale, int direction) {
         if (isTouching(Block.class)) {
@@ -24,7 +25,7 @@ public class MazeEnemy extends EnemyAnimatedActor {
             attackImgFiles[i] = "img/ninjagirl/Run__00" + i + ".png";
         }
         
-        
+        cooldown = new Timer(1000);
         animation = new Animation(50, imgFiles);
         animation.scale(scale);
         animation.setTransparency(5);
@@ -36,9 +37,10 @@ public class MazeEnemy extends EnemyAnimatedActor {
     public void act() {
         super.act();
         
-        if (isTouching(MazeMainCharacter.class)) {
+        if (isTouching(MazeMainCharacter.class) && cooldown.isDone()) {
             // decrease health
-            
+            Inventory.reduceHealth(1);
+            cooldown = new Timer(100000000);
         }
         
         if (isTouching(Block.class) && add == 0) {
