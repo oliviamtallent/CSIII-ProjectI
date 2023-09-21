@@ -6,7 +6,7 @@ public class GravityActor extends Actor {
     private int jumpStartX; // normalize x to 0
     private int jumpStartY;
     private int x;
-    private int ARC = 10; // vertex
+    private int ARC = 30; // vertex
     private int a;
     private boolean offTop;
     private int prevY = 0;
@@ -60,6 +60,16 @@ public class GravityActor extends Actor {
                 if (isBlocked()) {
                     setLocation(getX(), getY() - 1);
                 }
+            }
+        }
+        if(isTouching(Ladder.class)) {
+            Object a = getOneIntersectingObject(Ladder.class);
+            Ladder l = (Ladder) a;
+            if(isAtTopLadder(l)) {
+                setLocation(getX(), getY());
+            }
+            else {
+                setLocation(getX(), getY() - 10);
             }
         }
     }
@@ -119,5 +129,19 @@ public class GravityActor extends Actor {
         }
         
         return isJumping;
+    }
+    
+    public boolean isClimbing() {
+        if(isTouching(Ladder.class)) {
+            return true;
+        }
+        return false;
+    }
+    
+    public boolean isAtTopLadder(Ladder ladder) {
+        if(getY() == ladder.getY()) {
+            return true;
+        }
+        return false;
     }
 }

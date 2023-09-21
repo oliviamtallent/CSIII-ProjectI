@@ -1,0 +1,15 @@
+#BlueJ class context
+comment0.target=Inventory
+comment1.params=
+comment1.target=Inventory()
+comment2.params=
+comment2.target=java.util.ArrayList\ getInventory()
+comment3.params=
+comment3.target=int\ percentCollected()
+comment4.params=
+comment4.target=int\ getHealth()
+comment5.params=num
+comment5.target=void\ reduceHealth(int)
+comment6.params=item
+comment6.target=void\ addItem(java.lang.String)
+numComments=7

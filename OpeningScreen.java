@@ -2,7 +2,8 @@ import mayflower.*;
 
 public class OpeningScreen extends World
 {
-    private Cat cat;
+    private MainCharacter main;
+    private Ladder ladder;
     String[][] tiles;
     public OpeningScreen()
     {
@@ -12,10 +13,11 @@ public class OpeningScreen extends World
         showText("Collect all the ingredients before the party to win!", 16, 225, 350, Color.BLACK);
         showText("Watch out for obstacles and enemmies along the way!", 16, 225, 375, Color.BLACK);
         showText("Press 'space' to begin!", 32, 240, 420, Color.BLACK);
-        
+        ladder = new Ladder(50,100);
+        addObject(ladder, 100, 400);
         buildWorld();
-        cat = new Cat();
-        addObject(cat, 50, 20);
+        main = new MainCharacter(100);
+        addObject(main, 50, 20);
         
     }
     
@@ -42,7 +44,7 @@ public class OpeningScreen extends World
                 }
             }
         }
-        Star star = new Star();
+        Star star = new Star("Level1");
         addObject(star, offsetX + 20 * 16, 500);
     }
 
