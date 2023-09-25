@@ -1,99 +1,79 @@
 import mayflower.*;
 public class Level3World extends World
 {
-    private Cat cat;
-    private DogAnimatedActor dog;
-    private JackAnimatedActor jack;
-    private NinjaAnimatedActor ninjaHazard1;
-    private Strawberry edgeStrawberry;
-    private Strawberry strawberry1;  
-    private NinjaAnimatedActor ninjaHazard2;
+    private MainCharacter main;
+    //private DogAnimatedActor dog;
+    //private JackAnimatedActor jack;
+    private NinjaEnemy ninja1;
+    private Collectable strawberry1;
+    private Collectable strawberry2;
+    private NinjaEnemy ninja2;
     public Level3World() 
     {
         setBackground("img/BG/strawberryFieldCopy.jpeg");
         
-        Level3Block b = new Level3Block(2);
+        Block b = new Block(2, 100);
         addObject(b, 0, 500);
         
-        Level3Block b1 = new Level3Block(2);
+        Block b1 = new Block(2, 100);
         addObject(b1, 100, 500); //poi
         
-        Level3Block b2 = new Level3Block(2);
+        Block b2 = new Block(2, 100);
         addObject(b2, 200, 500); // straw
         
-        Level3Block b3 = new Level3Block(2);
+        Block b3 = new Block(2, 100);
         addObject(b3, 300, 500); // poi
         
-        Level3Block b4 = new Level3Block(2);
+        Block b4 = new Block(2, 100);
         addObject(b4, 400, 500); // straw
         
-        Level3Block b5 = new Level3Block(2);
+        Block b5 = new Block(2, 100);
         addObject(b5, 500, 500); // poi
         
-        Level3Block b6 = new Level3Block(2);
+        Block b6 = new Block(2, 100);
         addObject(b6, 600, 500); // straw
        
-        Level3Block b10 = new Level3Block(2);
+        Block b10 = new Block(2, 100);
         addObject(b10, 700, 500);
         
-        // Level3Block b7 = new Level3Block(13);
-        // addObject(b7, 174, 100); //160
+        // Block b7 = new Block(13, 100);
+        // addObject(b7, 174, 160); 
         
-        //Level3Block b8 = new Level3Block(14);
-        //addObject(b8, 302, 200); // straw
+        // Block b8 = new Block(14, 100);
+        // addObject(b8, 302, 160); // straw
         
-        // Level3Block block1 = new Level3Block(14);
-        // addObject(block1, 102, 300); // straw
+        // Block b9 = new Block(15, 100);
+        // addObject(b9, 430, 160);
         
-        //Level3Block block2 = new Level3Block(14);
-        //addObject(block2, 202, 200); // straw
+        main = new MainCharacter(80);
+        addObject(main, 30, 180);
+        //Mayflower.showBounds(true);
         
- 
+        strawberry1 = new Collectable("img/Object/strawberry.jpg", 60);
+        addObject(strawberry1, 100, 440);
         
-        // Level3Block b9 = new Level3Block(15);
-        // addObject(b9, 430, 100);
+        strawberry2 = new Collectable("img/Object/strawberry.jpg", 60);
+        addObject(strawberry2, 550, 440);
         
-        cat = new Cat();
-        // cat.scale(0.8);
-        cat.scaleLevel3Cat(80, 80);
-        addObject(cat, 30, 180);
-        Mayflower.showBounds(true);
+        ninja1 = new NinjaEnemy();
+        addObject(ninja1, 300, 400);
         
-        edgeStrawberry = new Strawberry();
-        addObject(edgeStrawberry, 450, 450); // ninja here instead
-        
-        /*
-        dog = new DogAnimatedActor();
-        addObject(dog, 300, 100);
-        
-        jack = new JackAnimatedActor();
-        addObject(jack, 500, 100);
-        */
-       
-        ninjaHazard1 = new NinjaAnimatedActor();
-        addObject(ninjaHazard1, 300, 300); 
-        
-        strawberry1 = new Strawberry();
-        addObject(strawberry1, 550, 450);
-        
-        ninjaHazard2 = new NinjaAnimatedActor();
-        addObject(ninjaHazard2, 650, 300); // strawberry here instead
-    
-        
+        ninja2 = new NinjaEnemy();
+        addObject(ninja2, 650, 400); // correct position for ninja
     }
     
     public void act()
     {
-      
+        
     }
     
-    public NinjaAnimatedActor getNinja1()
+    public NinjaEnemy getNinja1()
     {
-        return ninjaHazard1;
+        return ninja1;
     }
     
-    public NinjaAnimatedActor getNinja2()
+    public NinjaEnemy getNinja2()
     {
-        return ninjaHazard2;
+        return ninja2;
     }
 }

@@ -1,6 +1,7 @@
+
 import mayflower.*;
 
-public class MoveableAnimatedActor extends AnimatedActor {
+public class MazeMoveableAnimatedActor extends MazeAnimatedActor {
     private Animation walkRight;
     private Animation idle;
     private Animation idleLeft;
@@ -15,7 +16,7 @@ public class MoveableAnimatedActor extends AnimatedActor {
     private boolean isJumping;
     private boolean upClicked;
     
-    public MoveableAnimatedActor() {
+    public MazeMoveableAnimatedActor() {
         
     }
     
@@ -48,23 +49,24 @@ public class MoveableAnimatedActor extends AnimatedActor {
             while (isBlocked())
                 setLocation(getX() + 1, y);
         } 
-        if (Mayflower.isKeyDown(Keyboard.KEY_UP) && y > 0 && !upClicked) {
-            upClicked = true;
-            startJump(direction);
+        if (Mayflower.isKeyDown(Keyboard.KEY_UP)) {
+            newAction = "jump";
+            if (direction == "left")
+                setAnimation(jumpLeft);
+            else
+                setAnimation(jump);
+            for (int i = 0; i < 10; i++) {
+                setLocation(getX(), getY() - 1);
+                if (isBlocked())
+                    break;
+            }
         } 
         if (newAction == null) {
-            if (!Mayflower.isKeyDown(Keyboard.KEY_UP)) {
-                upClicked = false;
-            }
             newAction = "idle";
         }
         
         if (isFalling()) {
             newAction = "fall";
-        } else if (isJumping()) {
-            newAction = "jump";
-        } else if (isFalling() && isJumping) {
-            isJumping = false;
         }
         /*
         else if (Mayflower.isKeyDown(Keyboard.KEY_DOWN) && y + h < 600)

@@ -1,12 +1,10 @@
 import mayflower.*;
 
-public class AnimatedActor extends GravityActor 
-{
+public class EnemyAnimatedActor extends Actor {
     private Timer animationTimer;
     private Animation animation;
     
-    public AnimatedActor() 
-    {
+    public EnemyAnimatedActor() {
         
     }
     
@@ -17,8 +15,6 @@ public class AnimatedActor extends GravityActor
     }
 
     public void act() {
-        super.act();
-        
         if (animation != null && animationTimer.isDone()) {
             animationTimer.reset();
             MayflowerImage nextFrame = animation.getNextFrame();

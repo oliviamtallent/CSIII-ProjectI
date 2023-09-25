@@ -1,6 +1,6 @@
 import mayflower.*;
-public class Cat extends MoveableAnimatedActor 
-{
+
+public class MainCharacter extends MoveableAnimatedActor {
     private Animation walkRightAnimation;
     private Animation idleAnimation;
     private Animation idleLeftAnimation;
@@ -12,8 +12,8 @@ public class Cat extends MoveableAnimatedActor
     private int scaleX;
     private int scaleY;
   
-    public Cat() {
-        scaleY = 100;
+    public MainCharacter(int scaleY) {
+        this.scaleY = scaleY; //28
         scaleX = (int) (scaleY/100.0*87);
         String[] imgFiles = new String[10];
         for (int i = 0; i < imgFiles.length; i++) {
@@ -85,40 +85,55 @@ public class Cat extends MoveableAnimatedActor
         setJumpLeftAnimation(jumpLeftAnimation);
     }
     
-    public void act() 
-    {
-        //super.act();
-        // if(isTouching(NinjaAnimatedActor.class))
+    public void act() {
+        super.act();
+        // if(isTouching(NinjaEnemy.class))
         // {
             // World world = getWorld();
             // world.removeObject(this);
-        // }
+        // } delete most likely
        
-        // int x = getX();
-        // int y = getY();
-        
-        // Level3World world = (Level3World) getWorld();
-        // if(world != null)
-        // {
-            // int ninja1X = world.getNinja1().getX();
-            // int ninja1Y = world.getNinja1().getY();
+        int catX = getX();
+        int catY = getY();
+        int catW = getWidth();
+        int catH = getHeight();
+        World w = getWorld();
+
+        // make ninja go away in the ninja class not here 
+        if(isTouching(NinjaAnimatedActor.class))
+        {
+                w.removeObject(this);
+        }
+        if(w instanceof Level3World)
+        {
+            if(isTouching(NinjaAnimatedActor.class))
+            {
+                w.removeObject(this);
+            }
             
-            // if(x >= ninja1X && y <= ninja1Y)
-            // {
-                // world.removeObject(world.getNinja1());
-            // }
-        // }   
-    }
-    
-    public void scaleLevel3Cat(int scaleX2, int scaleY2)
-    {
-        walkRightAnimation.scale(scaleX2, scaleY2);
-        idleAnimation.scale(scaleX2, scaleY2);
-        idleLeftAnimation.scale(scaleX2, scaleY2);
-        walkLeftAnimation.scale(scaleX2, scaleY2);
-        fallAnimation.scale(scaleX2, scaleY2);
-        fallLeftAnimation.scale(scaleX2, scaleY2);
-        jumpAnimation.scale(scaleX2, scaleY2);
-        jumpLeftAnimation.scale(scaleX2, scaleY2);
+            Level3World world = (Level3World) getWorld();
+            int ninja1X = world.getNinja1().getX();
+            int ninja1Y = world.getNinja1().getY();
+            int ninjaW = world.getNinja1().getWidth();
+            int ninjaH = world.getNinja1().getHeight();
+            
+            int ninja2X = world.getNinja2().getX();
+            int ninja2Y = world.getNinja2().getY();
+            int ninja2W = world.getNinja2().getWidth();
+            int ninja2H = world.getNinja2().getHeight();
+            
+            if(world != null)
+            {
+                if(catX + 50 >= ninja1X && catY - 50 + catH <= ninja1Y)
+                {
+                    world.removeObject(world.getNinja1());
+                }
+                if(catX + 50 >= ninja2X && catY - 50 + catH <= ninja2Y)
+                {
+                    world.removeObject(world.getNinja2());
+                }
+            }   
+        }
+        
     }
 }

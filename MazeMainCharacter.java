@@ -1,6 +1,6 @@
 import mayflower.*;
-public class Cat extends MoveableAnimatedActor 
-{
+
+public class MazeMainCharacter extends MazeMoveableAnimatedActor {
     private Animation walkRightAnimation;
     private Animation idleAnimation;
     private Animation idleLeftAnimation;
@@ -12,8 +12,8 @@ public class Cat extends MoveableAnimatedActor
     private int scaleX;
     private int scaleY;
   
-    public Cat() {
-        scaleY = 100;
+    public MazeMainCharacter(int scaleY) {
+        this.scaleY = scaleY; //28
         scaleX = (int) (scaleY/100.0*87);
         String[] imgFiles = new String[10];
         for (int i = 0; i < imgFiles.length; i++) {
@@ -85,40 +85,7 @@ public class Cat extends MoveableAnimatedActor
         setJumpLeftAnimation(jumpLeftAnimation);
     }
     
-    public void act() 
-    {
-        //super.act();
-        // if(isTouching(NinjaAnimatedActor.class))
-        // {
-            // World world = getWorld();
-            // world.removeObject(this);
-        // }
-       
-        // int x = getX();
-        // int y = getY();
-        
-        // Level3World world = (Level3World) getWorld();
-        // if(world != null)
-        // {
-            // int ninja1X = world.getNinja1().getX();
-            // int ninja1Y = world.getNinja1().getY();
-            
-            // if(x >= ninja1X && y <= ninja1Y)
-            // {
-                // world.removeObject(world.getNinja1());
-            // }
-        // }   
-    }
-    
-    public void scaleLevel3Cat(int scaleX2, int scaleY2)
-    {
-        walkRightAnimation.scale(scaleX2, scaleY2);
-        idleAnimation.scale(scaleX2, scaleY2);
-        idleLeftAnimation.scale(scaleX2, scaleY2);
-        walkLeftAnimation.scale(scaleX2, scaleY2);
-        fallAnimation.scale(scaleX2, scaleY2);
-        fallLeftAnimation.scale(scaleX2, scaleY2);
-        jumpAnimation.scale(scaleX2, scaleY2);
-        jumpLeftAnimation.scale(scaleX2, scaleY2);
+    public void act() {
+        super.act();
     }
 }

@@ -2,6 +2,10 @@
 comment0.target=Block
 comment1.params=tile
 comment1.target=Block(int)
-comment2.params=
-comment2.target=void\ act()
-numComments=3
+comment2.params=tile\ scale
+comment2.target=Block(int,\ int)
+comment3.params=file
+comment3.target=Block(java.lang.String)
+comment4.params=
+comment4.target=void\ act()
+numComments=5
