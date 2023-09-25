@@ -8,6 +8,7 @@ public class Level3World extends World
     private Collectable strawberry1;
     private Collectable strawberry2;
     private NinjaEnemy ninja2;
+    private Star star;
     public Level3World() 
     {
         setBackground("img/BG/strawberryFieldCopy.jpeg");
@@ -53,13 +54,16 @@ public class Level3World extends World
         addObject(strawberry1, 100, 440);
         
         strawberry2 = new Collectable("img/Object/strawberry.jpg", 60);
-        addObject(strawberry2, 550, 440);
+        addObject(strawberry2, 650, 440);
         
         ninja1 = new NinjaEnemy();
         addObject(ninja1, 300, 400);
         
         ninja2 = new NinjaEnemy();
-        addObject(ninja2, 650, 400); // correct position for ninja
+        addObject(ninja2, 550, 400); // correct position for ninja
+        
+        star = new Star("Level1");
+        addObject(star, 700, 300);
     }
     
     public void act()
