@@ -1,4 +1,3 @@
-
 import mayflower.*;
 
 public class Collectable extends Actor {

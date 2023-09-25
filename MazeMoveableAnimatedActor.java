@@ -35,43 +35,42 @@ public class MazeMoveableAnimatedActor extends MazeAnimatedActor {
            newAction = "idle";
         }
         
-        if (Mayflower.isKeyDown(Keyboard.KEY_RIGHT) && x + w < 800) {
-            newDirection = "right";
-            newAction = "walkRight";
-            setLocation(x + 2, y);
-            while (isBlocked())
-                setLocation(getX() - 1, y);
-        } 
-        if (Mayflower.isKeyDown(Keyboard.KEY_LEFT) && x > 0) {
-            newDirection = "left";
-            newAction = "walkLeft";
-            setLocation(x - 2, y); 
-            while (isBlocked())
-                setLocation(getX() + 1, y);
-        } 
-        if (Mayflower.isKeyDown(Keyboard.KEY_UP)) {
-            newAction = "jump";
-            if (direction == "left")
-                setAnimation(jumpLeft);
-            else
-                setAnimation(jump);
-            for (int i = 0; i < 10; i++) {
-                setLocation(getX(), getY() - 1);
-                if (isBlocked())
-                    break;
+        if (!isFrozen()) {
+            if (Mayflower.isKeyDown(Keyboard.KEY_RIGHT) && x + w < 800) {
+                newDirection = "right";
+                newAction = "walkRight";
+                setLocation(x + 2, y);
+                while (isBlocked())
+                    setLocation(getX() - 1, y);
+            } 
+            if (Mayflower.isKeyDown(Keyboard.KEY_LEFT) && x > 0) {
+                newDirection = "left";
+                newAction = "walkLeft";
+                setLocation(x - 2, y); 
+                while (isBlocked())
+                    setLocation(getX() + 1, y);
+            } 
+            if (Mayflower.isKeyDown(Keyboard.KEY_UP)) {
+                newAction = "jump";
+                if (direction == "left")
+                    setAnimation(jumpLeft);
+                else
+                    setAnimation(jump);
+                for (int i = 0; i < 10; i++) {
+                    setLocation(getX(), getY() - 1);
+                    if (isBlocked())
+                        break;
+                }
+            } 
+            if (newAction == null) {
+                newAction = "idle";
             }
-        } 
-        if (newAction == null) {
-            newAction = "idle";
+            
+            if (isFalling()) {
+                newAction = "fall";
+            }
         }
         
-        if (isFalling()) {
-            newAction = "fall";
-        }
-        /*
-        else if (Mayflower.isKeyDown(Keyboard.KEY_DOWN) && y + h < 600)
-            setLocation(x, y + 1); 
-        */
        if (newAction != null && (newAction != currentAction || 
        (newDirection != null && newDirection != direction))) {
            if (newDirection != null)
