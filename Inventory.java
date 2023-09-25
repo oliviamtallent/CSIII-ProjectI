@@ -38,7 +38,7 @@ public class Inventory extends Actor {
     public static void reduceHealth(int num) {
         health = health - num;
         if (health == 0)
-            sYSTEM.OUT.PRINTLN("");
+            System.out.println("");
         else
             updateLives();
     }

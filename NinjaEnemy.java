@@ -20,5 +20,11 @@ public class NinjaEnemy extends EnemyAnimatedActor {
     public void act() 
     {
         super.act();
+        
+        if (isTouching(MainCharacter.class)) {
+            World w = getWorld();
+            w.removeObject(this);
+            Inventory.reduceHealth(1);
+        }
     }
 }

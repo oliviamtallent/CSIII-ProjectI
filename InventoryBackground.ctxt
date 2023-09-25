@@ -2,6 +2,8 @@
 comment0.target=InventoryBackground
 comment1.params=
 comment1.target=InventoryBackground()
-comment2.params=
-comment2.target=void\ act()
-numComments=3
+comment2.params=file
+comment2.target=InventoryBackground(java.lang.String)
+comment3.params=
+comment3.target=void\ act()
+numComments=4
