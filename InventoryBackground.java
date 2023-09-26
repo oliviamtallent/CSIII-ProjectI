@@ -11,6 +11,12 @@ public class InventoryBackground extends Actor {
         setImage(block);
     }
     
+    public InventoryBackground(String file, int x, int y, int w, int h) {
+        MayflowerImage block = new MayflowerImage(file);
+        block.crop(x, y, w, h);
+        setImage(block);
+    }
+    
     public void act() {
     }
 }

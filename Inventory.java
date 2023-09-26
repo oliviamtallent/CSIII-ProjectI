@@ -17,7 +17,7 @@ public class Inventory extends Actor {
     
     public void act() {}
     
-    public ArrayList<String> getInventory() {
+    public static ArrayList<String> getInventory() {
         return inventory;
     }
     
@@ -50,11 +50,12 @@ public class Inventory extends Actor {
     
     public static void setWorld(World w) {
         currentWorld = w;
-        updateLives();
-        updateInventory();
+        if (!(w instanceof WinWorld)){ 
+            updateLives();
+            updateInventory();
+        }
     }
-    
-    public static void updateInventory() {
+        public static void updateInventory() {
         for (InventoryItem i : items) {  
             currentWorld.removeObject(i);
         }
