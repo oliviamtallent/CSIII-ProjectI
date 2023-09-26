@@ -9,8 +9,8 @@ public class MainCharacter extends MoveableAnimatedActor {
     private Animation fallLeftAnimation;
     private Animation jumpAnimation;
     private Animation jumpLeftAnimation;
+    private Animation climbAnimation;
     private Animation climbLeftAnimation;
-    private Animation climbRightAnimation;
     private int scaleX;
     private int scaleY;
   
@@ -38,8 +38,8 @@ public class MainCharacter extends MoveableAnimatedActor {
         }
         
         String[] climbImgs = new String[8];
-        for (int i = 0; i < jumpImgs.length; i++ ) {
-            jumpImgs[i] = "img/cat/Run (" + (i + 1) + ").png";
+        for(int i = 0; i < climbImgs.length; i++) {
+            climbImgs[i] = "img/cat/Run (" + (i + 1) + ").png";
         }
         
         String[] testImgs = new String[8];
@@ -57,11 +57,6 @@ public class MainCharacter extends MoveableAnimatedActor {
         idleLeftAnimation.mirrorHorizontally();
         //idleLeftAnimation.setBounds(28, 5, 54, 80);
         setIdleLeftAnimation(idleLeftAnimation);
-        
-        climbLeftAnimation = new Animation(50, climbImgs);
-        climbLeftAnimation.scale(scaleX, scaleY);
-        climbLeftAnimation.mirrorHorizontally();
-        //setClimbLeftAnimation(climbLeftAnimation);
         
         walkRightAnimation = new Animation(50, imgFiles);
         walkRightAnimation.scale(scaleX, scaleY);
@@ -95,6 +90,15 @@ public class MainCharacter extends MoveableAnimatedActor {
         jumpLeftAnimation.mirrorHorizontally();
         //jumpLeftAnimation.setBounds(20, 4, 68, 81);
         setJumpLeftAnimation(jumpLeftAnimation);
+        
+        climbAnimation = new Animation(50, climbImgs);
+        climbAnimation.scale(scaleX, scaleY);
+        setClimbAnimation(climbAnimation);
+        
+        climbLeftAnimation = new Animation(50, climbImgs);
+        climbLeftAnimation.scale(scaleX, scaleY);
+        climbLeftAnimation.mirrorHorizontally();
+        setClimbLeftAnimation(climbLeftAnimation);
     }
     
     public void act() {

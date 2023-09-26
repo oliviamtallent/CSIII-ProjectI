@@ -50,19 +50,21 @@ public class Level1World extends World {
         for (int r = 0; r < mazeGrid.length; r++) {
             for (int c = 0; c < mazeGrid[r].length; c++) {
                 if (mazeGrid[r][c] == 1) {
-                    Block b = new Block("img/Tiles/2.png");
+                    Block b;
+                    b = new Block("img/Tiles/aisle.png");
                     addObject(b, offsetX + c * 16, offsetY + r * 16);
                 }
             }
         }
         
         // put objects randomly
-        String[] objects = {"candles", "Mushroom_1", "Mushroom_1", "Mushroom_1"};
+        String[] objects = {"candles", "frosting", "Mushroom_1", "Mushroom_1"};
         for (String obj : objects) {
             while (true) {
                int y = (int) (Math.random() * mazeGrid.length);
                int x = (int) (Math.random() * mazeGrid[0].length);
                if (mazeGrid[y][x] == 0) {
+                   System.out.println(x + " " + y);
                    Collectable item = new Collectable("img/Object/"+obj+".png", 18);
                    addObject(item, offsetX + x * 16, offsetY + y * 16);
                    break;
@@ -71,7 +73,7 @@ public class Level1World extends World {
         }
         
         // random generate enemy
-        int[][] enemys = {{2, 22, 25}};
+        int[][] enemys = {{2, 22, 25}, {1, 16, 8}, {1, 43, 5}};
         for (int i = 0; i < enemys.length; i++) {
             MazeEnemy item = new MazeEnemy(.04, enemys[i][0]);
             addObject(item, offsetX + enemys[i][1] * 16, offsetY + enemys[i][2] * 16);
@@ -80,7 +82,7 @@ public class Level1World extends World {
         main = new MazeMainCharacter(28);
         addObject(main, 20 * 16, 0 * 16);
         
-        Star star = new Star("Level2");
+        Star star = new Star("Level3");
         addObject(star, offsetX + 16 * 32, offsetY + 16 * mazeGrid.length - 1);
     }
     

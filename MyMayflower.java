@@ -14,8 +14,8 @@ public class MyMayflower extends Mayflower
         //Change this to true to run this program in fullscreen mode
         Mayflower.setFullScreen(false);
         Inventory inv = new Inventory();
-        OpeningScreen w =  new OpeningScreen();
-        Level2World w2 = new Level2World();
+        //OpeningScreen w =  new OpeningScreen();
+        Level2World w = new Level2World();
         Mayflower.setWorld(w);
     }
 }

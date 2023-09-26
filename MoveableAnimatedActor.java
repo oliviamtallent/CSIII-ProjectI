@@ -9,6 +9,8 @@ public class MoveableAnimatedActor extends AnimatedActor {
     private Animation fallLeft;
     private Animation jump;
     private Animation jumpLeft;
+    private Animation climb;
+    private Animation climbLeft;
     private String currentAction;
     private String direction;
     private int jumping;
@@ -65,7 +67,11 @@ public class MoveableAnimatedActor extends AnimatedActor {
             newAction = "jump";
         } else if (isFalling() && isJumping) {
             isJumping = false;
+        } else if (isClimbing()) {
+            newAction = "climb";
         }
+        
+      
         /*
         else if (Mayflower.isKeyDown(Keyboard.KEY_DOWN) && y + h < 600)
             setLocation(x, y + 1); 
@@ -98,6 +104,11 @@ public class MoveableAnimatedActor extends AnimatedActor {
                else
                     setAnimation(jump);
                 currentAction = "jump";
+            } else if (newAction == "climb") {
+                if (direction != null && direction == "left")
+                    setAnimation(climbLeft);
+                else
+                    setAnimation(climb);
             }
         }
     }
@@ -137,4 +148,13 @@ public class MoveableAnimatedActor extends AnimatedActor {
     public void setJumpLeftAnimation(Animation a) {
         jumpLeft = a;
     }
+    
+    public void setClimbAnimation(Animation a) {
+        climb = a;
+    }
+    
+    public void setClimbLeftAnimation(Animation a) {
+        climbLeft = a;
+    }
 }
+    

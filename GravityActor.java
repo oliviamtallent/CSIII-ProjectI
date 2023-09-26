@@ -69,7 +69,7 @@ public class GravityActor extends Actor {
                 setLocation(getX(), getY());
             }
             else {
-                setLocation(getX(), getY() - 10);
+                setLocation(getX(), getY() - 4.5);
             }
         }
     }
@@ -131,7 +131,7 @@ public class GravityActor extends Actor {
         return isJumping;
     }
     
-    public boolean isClimbing() {
+        public boolean isClimbing() {
         if(isTouching(Ladder.class)) {
             return true;
         }
