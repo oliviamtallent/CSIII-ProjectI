@@ -72,6 +72,9 @@ public class GravityActor extends Actor {
                 setLocation(getX(), getY() - 4.5);
             }
         }
+        if(isTouching(Slide.class)) {
+            setLocation(getX(), getY() + 4.5);
+        }
     }
     
     public boolean isBlocked() {

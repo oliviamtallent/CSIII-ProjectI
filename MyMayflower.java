@@ -15,7 +15,7 @@ public class MyMayflower extends Mayflower
         Mayflower.setFullScreen(false);
         Inventory inv = new Inventory();
         //OpeningScreen w =  new OpeningScreen();
-        Level2World w = new Level2World();
+        OpeningScreen w = new OpeningScreen();
         Mayflower.setWorld(w);
     }
 }

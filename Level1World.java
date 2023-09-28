@@ -82,7 +82,7 @@ public class Level1World extends World {
         main = new MazeMainCharacter(28);
         addObject(main, 20 * 16, 0 * 16);
         
-        Star star = new Star("Level3");
+        Star star = new Star("Level2");
         addObject(star, offsetX + 16 * 32, offsetY + 16 * mazeGrid.length - 1);
     }
     
