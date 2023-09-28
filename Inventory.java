@@ -37,9 +37,12 @@ public class Inventory extends Actor {
     
     public static void reduceHealth(int num) {
         health = health - num;
-        if (health == 0)
-            System.out.println("");
-        else
+        if (health == 0) {
+            World newWorld = new LoseWorld();
+            clearInventory();
+            Mayflower.setWorld(newWorld);
+            Inventory.setWorld(newWorld);
+        } else
             updateLives();
     }
     
@@ -55,16 +58,19 @@ public class Inventory extends Actor {
             updateInventory();
         }
     }
-        public static void updateInventory() {
-        for (InventoryItem i : items) {  
-            currentWorld.removeObject(i);
-        }
-        
-        items.clear();
-        
-        for (int i = 0; i < inventory.size(); i++) {
-            items.add(new InventoryItem(inventory.get(i)));
-            currentWorld.addObject(items.get(i), 35 + i * 50, 20);
+    
+    public static void updateInventory() {
+        if (health > 0) {
+            for (InventoryItem i : items) {  
+                currentWorld.removeObject(i);
+            }
+            
+            items.clear();
+            
+            for (int i = 0; i < inventory.size(); i++) {
+                items.add(new InventoryItem(inventory.get(i)));
+                currentWorld.addObject(items.get(i), 35 + i * 50, 20);
+            }
         }
     }
     
@@ -79,5 +85,20 @@ public class Inventory extends Actor {
             hearts.add(new InventoryItem("img/Object/heart.png"));
             currentWorld.addObject(hearts.get(i), 590 + i * 40, 20);
         }
+    }
+    
+    public static void clearInventory() {
+        for (InventoryItem i : hearts) {  
+            currentWorld.removeObject(i);
+        }
+        
+        hearts.clear();
+        
+        for (InventoryItem i : items) {  
+            currentWorld.removeObject(i);
+        }
+        
+        items.clear();
+        System.out.println("test?");
     }
 }

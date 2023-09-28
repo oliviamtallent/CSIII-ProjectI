@@ -23,7 +23,7 @@ public class Star extends Actor
                 newWorld = new Level3World();
             else if (nextWorld == "Win") {
                 newWorld = new WinWorld();
-            }
+            } 
             
             if (newWorld != null) {
                 Mayflower.setWorld(newWorld);

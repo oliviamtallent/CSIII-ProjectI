@@ -47,7 +47,7 @@ public class OpeningScreen extends World
         InventoryBackground invBg = new InventoryBackground("img/BG/main ground.png");
         addObject(invBg, 0, 0);
         
-        Star star = new Star("Win");
+        Star star = new Star("Level1");
         addObject(star, offsetX + 20 * 16, 400);
     }
 
