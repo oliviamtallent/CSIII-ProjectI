@@ -34,6 +34,7 @@ public class MoveableAnimatedActor extends AnimatedActor {
            newAction = "idle";
         }
         
+        // if moving right
         if (Mayflower.isKeyDown(Keyboard.KEY_RIGHT) && x + w < 800) {
             newDirection = "right";
             newAction = "walkRight";
@@ -41,6 +42,8 @@ public class MoveableAnimatedActor extends AnimatedActor {
             while (isBlocked())
                 setLocation(getX() - 1, y);
         } 
+        
+        // if moving left
         if (Mayflower.isKeyDown(Keyboard.KEY_LEFT) && x > 0) {
             newDirection = "left";
             newAction = "walkLeft";
@@ -48,10 +51,14 @@ public class MoveableAnimatedActor extends AnimatedActor {
             while (isBlocked())
                 setLocation(getX() + 1, y);
         } 
+        
+        // if jumping
         if (Mayflower.isKeyDown(Keyboard.KEY_UP) && y > 0 && !upClicked) {
             upClicked = true;
             startJump(direction);
         } 
+        
+        // otherwise idle
         if (newAction == null) {
             if (!Mayflower.isKeyDown(Keyboard.KEY_UP)) {
                 upClicked = false;
@@ -59,6 +66,7 @@ public class MoveableAnimatedActor extends AnimatedActor {
             newAction = "idle";
         }
         
+        // fall or jump 
         if (isFalling()) {
             newAction = "fall";
         } else if (isJumping()) {
@@ -66,10 +74,8 @@ public class MoveableAnimatedActor extends AnimatedActor {
         } else if (isFalling() && isJumping) {
             isJumping = false;
         }
-        /*
-        else if (Mayflower.isKeyDown(Keyboard.KEY_DOWN) && y + h < 600)
-            setLocation(x, y + 1); 
-        */
+        
+        // set animation according to direction and newAction
        if (newAction != null && (newAction != currentAction || 
        (newDirection != null && newDirection != direction))) {
            if (newDirection != null)

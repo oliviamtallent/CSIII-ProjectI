@@ -13,8 +13,10 @@ public class MazeMainCharacter extends MazeMoveableAnimatedActor {
     private int scaleY;
   
     public MazeMainCharacter(int scaleY) {
-        this.scaleY = scaleY; //28
+        this.scaleY = scaleY;
         scaleX = (int) (scaleY/100.0*87);
+        
+        // generate animation images
         String[] imgFiles = new String[10];
         for (int i = 0; i < imgFiles.length; i++) {
             imgFiles[i] = "img/cat/Walk (" + (i + 1) + ").png";
@@ -40,48 +42,49 @@ public class MazeMainCharacter extends MazeMoveableAnimatedActor {
             testImgs[i] = "img/dog/Jump (" + (i + 1) + ").png";
         }
         
+        // set animations
         idleAnimation = new Animation(50, idleImgs);
+        //idleAnimation.setBounds(15, 5, 48, 93);
         idleAnimation.scale(scaleX, scaleY);
-        //idleAnimation.setBounds(18, 5, 54, 80);
         setIdleAnimation(idleAnimation);
         
         idleLeftAnimation = new Animation(50, idleImgs);
-        idleLeftAnimation.scale(scaleX, scaleY);
         idleLeftAnimation.mirrorHorizontally();
-        //idleLeftAnimation.setBounds(28, 5, 54, 80);
+        //idleLeftAnimation.setBounds(23, 5, 48, 93);
+        idleLeftAnimation.scale(scaleX, scaleY);
         setIdleLeftAnimation(idleLeftAnimation);
         
         walkRightAnimation = new Animation(50, imgFiles);
+        //walkRightAnimation.setBounds(15, 5, 48, 93);
         walkRightAnimation.scale(scaleX, scaleY);
-        //walkRightAnimation.setBounds(18, 5, 54, 80);
         setWalkRightAnimation(walkRightAnimation);
         
         walkLeftAnimation = new Animation(50, imgFiles);
-        walkLeftAnimation.scale(scaleX, scaleY);
         walkLeftAnimation.mirrorHorizontally();
-        //walkLeftAnimation.setBounds(28, 5, 54, 80);
+        //walkLeftAnimation.setBounds(23, 5, 48, 93);
+        walkLeftAnimation.scale(scaleX, scaleY);
         setWalkLeftAnimation(walkLeftAnimation);
         
         fallAnimation = new Animation(50, fallImgs);
+        //fallAnimation.setBounds(10, 2, 50, 93);
         fallAnimation.scale(scaleX, scaleY);
-        //fallAnimation.setBounds(12, 2, 54, 83);
         setFallAnimation(fallAnimation);
         
         fallLeftAnimation = new Animation(50, fallImgs);
-        fallLeftAnimation.scale(scaleX, scaleY);
         fallLeftAnimation.mirrorHorizontally();
-        //fallLeftAnimation.setBounds(32, 2, 54, 83);
+        //fallLeftAnimation.setBounds(25, 2, 50, 93);
+        fallLeftAnimation.scale(scaleX, scaleY);
         setFallLeftAnimation(fallLeftAnimation);
         
         jumpAnimation = new Animation(50, jumpImgs);
+        //jumpAnimation.setBounds(10, 3, 58, 95);
         jumpAnimation.scale(scaleX, scaleY);
-        //jumpAnimation.setBounds(10, 3, 68, 84);
         setJumpAnimation(jumpAnimation);
         
         jumpLeftAnimation = new Animation(50, jumpImgs);
-        jumpLeftAnimation.scale(scaleX, scaleY);
         jumpLeftAnimation.mirrorHorizontally();
-        //jumpLeftAnimation.setBounds(20, 4, 68, 81);
+        //jumpLeftAnimation.setBounds(20, 3, 58, 95);
+        jumpLeftAnimation.scale(scaleX, scaleY);
         setJumpLeftAnimation(jumpLeftAnimation);
     }
     

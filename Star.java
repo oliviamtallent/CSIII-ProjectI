@@ -11,9 +11,10 @@ public class Star extends Actor
     }
 
     public void act() {
-        if(isTouching(MainCharacter.class) || isTouching(MazeMainCharacter.class)) {
+        if(isTouching(MainCharacter.class) || isTouching(MazeMainCharacter.class) || isTouching(FarmMainCharacter.class)) {
             getWorld().removeObject(this);
             
+            // generate new world
             World newWorld = null;
             if (nextWorld == "Level1") 
                 newWorld = new Level1World();
@@ -23,8 +24,9 @@ public class Star extends Actor
                 newWorld = new Level3World();
             else if (nextWorld == "Win") {
                 newWorld = new WinWorld();
-            }
+            } 
             
+            // update world in mayflower and inventory
             if (newWorld != null) {
                 Mayflower.setWorld(newWorld);
                 Inventory.setWorld(newWorld);

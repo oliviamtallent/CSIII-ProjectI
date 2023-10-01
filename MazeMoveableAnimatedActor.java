@@ -35,7 +35,9 @@ public class MazeMoveableAnimatedActor extends MazeAnimatedActor {
            newAction = "idle";
         }
         
+        // if not frozen by enemy
         if (!isFrozen()) {
+            // move right
             if (Mayflower.isKeyDown(Keyboard.KEY_RIGHT) && x + w < 800) {
                 newDirection = "right";
                 newAction = "walkRight";
@@ -43,6 +45,8 @@ public class MazeMoveableAnimatedActor extends MazeAnimatedActor {
                 while (isBlocked())
                     setLocation(getX() - 1, y);
             } 
+            
+            // move left
             if (Mayflower.isKeyDown(Keyboard.KEY_LEFT) && x > 0) {
                 newDirection = "left";
                 newAction = "walkLeft";
@@ -50,6 +54,8 @@ public class MazeMoveableAnimatedActor extends MazeAnimatedActor {
                 while (isBlocked())
                     setLocation(getX() + 1, y);
             } 
+            
+            // jump
             if (Mayflower.isKeyDown(Keyboard.KEY_UP)) {
                 newAction = "jump";
                 if (direction == "left")
@@ -62,12 +68,15 @@ public class MazeMoveableAnimatedActor extends MazeAnimatedActor {
                         break;
                 }
             } 
-            if (newAction == null) {
-                newAction = "idle";
-            }
             
+            // if not blocked underneath
             if (isFalling()) {
                 newAction = "fall";
+            }
+            
+            // if no new action action is idle
+            if (newAction == null) {
+                newAction = "idle";
             }
         }
         
@@ -75,6 +84,8 @@ public class MazeMoveableAnimatedActor extends MazeAnimatedActor {
        (newDirection != null && newDirection != direction))) {
            if (newDirection != null)
                 direction = newDirection;
+               
+            // set animation according to newAction
            if (newAction == "walkRight") {
                 setAnimation(walkRight);
                 currentAction = "walkRight";

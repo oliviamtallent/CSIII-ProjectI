@@ -1,26 +1,28 @@
 import mayflower.*;
 
 public class NinjaEnemy extends EnemyAnimatedActor {
-    private Animation animation;
+    private Animation attackAnimation;
     
-    public NinjaEnemy() 
-    {
-        String[] imgFiles = new String[10];
-        for (int i = 0; i < imgFiles.length; i++) 
+    public NinjaEnemy() {
+        // generate animation files
+        String[] attackFiles = new String[10];
+        for (int i = 0; i < attackFiles.length; i++) 
         {
-            imgFiles[i] = "img/ninjagirl/Attack__00" + i + ".png";
+            attackFiles[i] = "img/ninjagirl/Attack__00" + i + ".png";
         }
         
-        animation = new Animation(50, imgFiles);
-        animation.scale(.19);
-        animation.setTransparency(5);
-        setAnimation(animation);
+        // set animation
+        attackAnimation = new Animation(50, attackFiles);
+        attackAnimation.scale(.19);
+        attackAnimation.setTransparency(5);
+        setAnimation(attackAnimation);
     }
 
     public void act() 
     {
         super.act();
         
+        // remove and reduce health if touching maincharacter
         if (isTouching(MainCharacter.class)) {
             World w = getWorld();
             w.removeObject(this);

@@ -7,6 +7,7 @@ public class MazeGravityActor extends Actor {
     }
     
     public void act() {  
+        // if not frozen by the enemy: fall
         if (!isFrozen) {
             int fallSpeed = 3;
             setLocation(getX(), getY() + fallSpeed);
@@ -17,6 +18,7 @@ public class MazeGravityActor extends Actor {
             }
         }
     }
+    
     public void setFrozen(boolean isFrozen) {
         this.isFrozen = isFrozen;
     }

@@ -11,7 +11,6 @@ public class EnemyAnimatedActor extends Actor {
     public void setAnimation(Animation a) {
         animation = a;
         animationTimer = new Timer(animation.getFrameRate() * 1000000);
-        //animationTimer = new Timer(1000);
     }
 
     public void act() {
