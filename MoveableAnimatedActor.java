@@ -58,6 +58,14 @@ public class MoveableAnimatedActor extends AnimatedActor {
             startJump(direction);
         } 
         
+        // otherwise idle
+        if (newAction == null) {
+            if (!Mayflower.isKeyDown(Keyboard.KEY_UP)) {
+                upClicked = false;
+            }
+            newAction = "idle";
+        }
+        
         // fall or jump 
         if (isFalling()) {
             newAction = "fall";
@@ -65,14 +73,6 @@ public class MoveableAnimatedActor extends AnimatedActor {
             newAction = "jump";
         } else if (isFalling() && isJumping) {
             isJumping = false;
-        }
-        
-        // otherwise idle
-        if (newAction == null) {
-            if (!Mayflower.isKeyDown(Keyboard.KEY_UP)) {
-                upClicked = false;
-            }
-            newAction = "idle";
         }
         
         // set animation according to direction and newAction
