@@ -13,6 +13,12 @@ public class Block extends Actor {
         setImage(block);
     }
     
+    public Block(String file, int scale) {
+        MayflowerImage block = new MayflowerImage(file);
+        block.scale(scale, scale);
+        setImage(block);
+    }
+    
     public Block(String file) {
         MayflowerImage block = new MayflowerImage(file);
         block.scale(16, 16);

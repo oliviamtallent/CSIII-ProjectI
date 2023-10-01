@@ -6,6 +6,7 @@ public class InventoryItem extends Actor {
     private int offsetX;
     private int offsetY;
     private String file;
+    
     public InventoryItem(String file) {
         this.file = file;
         MayflowerImage item = new MayflowerImage(file);
@@ -22,6 +23,7 @@ public class InventoryItem extends Actor {
     }
     
     public void act() {
+        // follow mouse if on win screen and isfollowing
         if (isWinScreen && isFollowing) {
             MouseInfo mInfo = Mayflower.getMouseInfo();
             setLocation(mInfo.getX() + offsetX, mInfo.getY() + offsetY);
@@ -35,6 +37,7 @@ public class InventoryItem extends Actor {
             offsetX = getX() - mInfo.getX();
             offsetY = getY() - mInfo.getY();
         } else {
+            // if touching the bowl and mouse not clicked drop into bowl
             if (isTouching(InventoryBackground.class)) {
                 WinWorld w = (WinWorld) getWorld();
                 w.addToBowl(file);

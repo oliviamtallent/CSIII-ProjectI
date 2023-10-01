@@ -1,21 +1,24 @@
 import mayflower.*;
 
-public class MoveableAnimatedActor extends AnimatedActor {
+public class FarmMoveableAnimatedActor extends FarmAnimatedActor {
     private Animation walkRight;
     private Animation idle;
     private Animation idleLeft;
     private Animation walkLeft;
     private Animation fall;
     private Animation fallLeft;
-    private Animation jump;
-    private Animation jumpLeft;
+    private Animation climb;
+    private Animation climbLeft;
+    private Animation slide;
+    private Animation slideLeft;
     private String currentAction;
     private String direction;
     private int jumping;
     private boolean isJumping;
     private boolean upClicked;
+    private boolean downClicked;
     
-    public MoveableAnimatedActor() {
+    public FarmMoveableAnimatedActor() {
         
     }
     
@@ -52,30 +55,35 @@ public class MoveableAnimatedActor extends AnimatedActor {
                 setLocation(getX() + 1, y);
         } 
         
-        // if jumping
+        // if going up
         if (Mayflower.isKeyDown(Keyboard.KEY_UP) && y > 0 && !upClicked) {
             upClicked = true;
-            startJump(direction);
+            startLadder(direction);
         } 
         
-        // fall or jump 
-        if (isFalling()) {
-            newAction = "fall";
-        } else if (isJumping()) {
-            newAction = "jump";
-        } else if (isFalling() && isJumping) {
-            isJumping = false;
-        }
-        
-        // otherwise idle
+        // if going down
+        if (Mayflower.isKeyDown(Keyboard.KEY_DOWN) && !downClicked) {
+            downClicked = true;
+            startSlide();
+        } 
         if (newAction == null) {
             if (!Mayflower.isKeyDown(Keyboard.KEY_UP)) {
                 upClicked = false;
             }
+            if (!Mayflower.isKeyDown(Keyboard.KEY_DOWN)) 
+                downClicked = false;
             newAction = "idle";
         }
         
-        // set animation according to direction and newAction
+        if (isFalling()) {
+            newAction = "fall";
+        } else if (isLaddering()) {
+            newAction = "climb";
+        } else if(isSliding()) {
+            newAction = "slide";
+        } 
+        
+        // set animation according to direction and action
        if (newAction != null && (newAction != currentAction || 
        (newDirection != null && newDirection != direction))) {
            if (newDirection != null)
@@ -98,12 +106,18 @@ public class MoveableAnimatedActor extends AnimatedActor {
                else
                     setAnimation(fall);
                 currentAction = "fall";
-            } else if (newAction == "jump") {
+            } else if (newAction == "climb") {
                if (direction != null && direction == "left")
-                    setAnimation(jumpLeft);
+                    setAnimation(climbLeft);
                else
-                    setAnimation(jump);
-                currentAction = "jump";
+                    setAnimation(climb);
+                currentAction = "climb";
+            } else if (newAction == "slide") {
+               if (direction != null && direction == "left")
+                    setAnimation(slideLeft);
+               else
+                    setAnimation(slide);
+                currentAction = "slide";
             }
         }
     }
@@ -136,11 +150,19 @@ public class MoveableAnimatedActor extends AnimatedActor {
         fallLeft = a;
     }
     
-    public void setJumpAnimation(Animation a) {
-        jump = a;
+    public void setClimbAnimation(Animation a) {
+        climb = a;
     }
     
-    public void setJumpLeftAnimation(Animation a) {
-        jumpLeft = a;
+    public void setClimbLeftAnimation(Animation a) {
+        climbLeft = a;
+    }
+    
+    public void setSlideAnimation(Animation a) {
+        slide = a;
+    }
+    
+    public void setSlideLeftAnimation(Animation a) {
+        slideLeft = a;
     }
 }

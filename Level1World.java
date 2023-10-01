@@ -41,10 +41,12 @@ public class Level1World extends World {
     
     public Level1World() 
     {
+        // add background and inventory bar
         setBackground("img/BG/grocery.png");
         InventoryBackground invBg = new InventoryBackground();
         addObject(invBg, 0, 0);
         
+        // add maze blocks in each 1 labeled item in the mazeGrid
         offsetX = (800 - (mazeGrid[0].length * 16)) / 2;
         offsetY = 560 - (mazeGrid.length * 16);
         for (int r = 0; r < mazeGrid.length; r++) {
@@ -57,14 +59,14 @@ public class Level1World extends World {
             }
         }
         
-        // put objects randomly
-        String[] objects = {"candles", "frosting", "Mushroom_1", "Mushroom_1"};
+        // put collectable objects randomly
+        String[] objects = {"candles", "frosting", "butter", "sugar"};
         for (String obj : objects) {
             while (true) {
                int y = (int) (Math.random() * mazeGrid.length);
                int x = (int) (Math.random() * mazeGrid[0].length);
                if (mazeGrid[y][x] == 0) {
-                   System.out.println(x + " " + y);
+                   mazeGrid[y][x] = 2;
                    Collectable item = new Collectable("img/Object/"+obj+".png", 18);
                    addObject(item, offsetX + x * 16, offsetY + y * 16);
                    break;
@@ -72,17 +74,19 @@ public class Level1World extends World {
             }
         }
         
-        // random generate enemy
-        int[][] enemys = {{2, 22, 25}, {1, 16, 8}, {1, 43, 5}};
+        // generate enemies {direction [1: vertical, 2: horizontal], y, x}}
+        int[][] enemys = {{2, 22, 25}, {1, 16, 8}, {1, 43, 5}, {1, 1, 16}, {2, 4, 4}, {1, 13, 16}};
         for (int i = 0; i < enemys.length; i++) {
             MazeEnemy item = new MazeEnemy(.04, enemys[i][0]);
             addObject(item, offsetX + enemys[i][1] * 16, offsetY + enemys[i][2] * 16);
         }
         
+        // add MainCharacter at top of maze
         main = new MazeMainCharacter(28);
         addObject(main, 20 * 16, 0 * 16);
         
-        Star star = new Star("Level3");
+        // add star to reach to end level (pass next level into the constructor)
+        Star star = new Star("Level2");
         addObject(star, offsetX + 16 * 32, offsetY + 16 * mazeGrid.length - 1);
     }
     

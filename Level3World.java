@@ -2,8 +2,6 @@ import mayflower.*;
 public class Level3World extends World
 {
     private MainCharacter main;
-    //private DogAnimatedActor dog;
-    //private JackAnimatedActor jack;
     private NinjaEnemy ninja1;
     private NinjaEnemy ninja2;
     private Collectable strawberry1;
@@ -12,10 +10,12 @@ public class Level3World extends World
     
     public Level3World() 
     {
+        // add background and inventory bar
         setBackground("img/BG/strawberryFieldCopy.jpeg");
         InventoryBackground invBg = new InventoryBackground();
         addObject(invBg, 0, 0);
         
+        // build world with objects
         Block b = new Block(2, 100);
         addObject(b, 0, 500);
         
@@ -43,10 +43,10 @@ public class Level3World extends World
         main = new MainCharacter(80);
         addObject(main, 30, 180);
         
-        strawberry1 = new Collectable("img/Object/strawberry.jpg", 60);
+        strawberry1 = new Collectable("img/Object/strawberry.png", 60);
         addObject(strawberry1, 100, 440);
         
-        strawberry2 = new Collectable("img/Object/strawberry.jpg", 60);
+        strawberry2 = new Collectable("img/Object/strawberry.png", 60);
         addObject(strawberry2, 650, 440);
         
         ninja1 = new NinjaEnemy();

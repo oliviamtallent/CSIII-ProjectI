@@ -1,7 +1,10 @@
 import mayflower.*;
 public class LoseWorld extends World {
     public LoseWorld() {
+        // show background
         setBackground("img/BG/loseworld.png");
+        
+        // show dead cat
         String[] imgFiles = new String[10];
         for (int i = 0; i < imgFiles.length; i++) {
             imgFiles[i] = "img/cat/Dead (" + (i+1) + ").png";
