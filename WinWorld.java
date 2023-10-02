@@ -8,6 +8,7 @@ public class WinWorld extends World {
     private int goal = 10;
     private InventoryItem current;
     private int count;
+    private boolean finished;
     
     public WinWorld() {
         // add background and inventory bar
@@ -40,34 +41,45 @@ public class WinWorld extends World {
                 current = (InventoryItem) clicked;
                 current.setIsFollowing(true);
             } else if (clicked instanceof InventoryBackground) {
-                // if clicked the finish button
-                InventoryBackground button = (InventoryBackground) clicked;
-                if (button.isButton()) {
-                    removeObject(bowl);
-                    removeObject(button);
-                    
-                    // generate end result cake
-                    int cake = 0;
-                    String score = "Oh no!\n You got 0%!";
-                    if (percent == 100) {
-                        cake = 100;
-                        score = "You win!\n With a perfect cake!";
-                    } else if (percent >= 75) {
-                        cake = 75;
-                        score = "Almost there!\n You got 75% of the ingredients!";
-                    } else if (percent >= 50) {
-                        cake = 50;
-                        score = "Well done!\n You got half of the ingredients!";
-                    } else if (percent >= 25) {
-                        cake = 25;
-                        score = "Uh oh!\n You only got 25% of the ingredients!";
+                if (!finished) {
+                    // if clicked the finish button
+                    InventoryBackground button = (InventoryBackground) clicked;
+                    if (button.isButton()) {
+                        removeObject(bowl);
+                        removeObject(button);
+                        
+                        // generate end result cake
+                        int cake = 0;
+                        String score = "Oh no!\n You got 0%!";
+                        if (percent == 100) {
+                            cake = 100;
+                            score = "You win!\n With a perfect cake!";
+                        } else if (percent >= 75) {
+                            cake = 75;
+                            score = "Almost there!\n You got 75% of the ingredients!";
+                        } else if (percent >= 50) {
+                            cake = 50;
+                            score = "Well done!\n You got half of the ingredients!";
+                        } else if (percent >= 25) {
+                            cake = 25;
+                            score = "Uh oh!\n You only got 25% of the ingredients!";
+                        }
+                        
+                        // show result
+                        finished = true;
+                        InventoryBackground result = new InventoryBackground("img/Object/"+ cake + ".png");
+                        addObject(result, 200, 100);
+                        
+                        InventoryBackground replayBtn = new InventoryBackground("img/Object/replay_button.png", 200, true);
+                        addObject(replayBtn, 350, 400);
+                        
+                        removeText(375, 550);
+                        showText(score, 40, 10, 50, Color.BLACK);
                     }
-                    
-                    // show result
-                    InventoryBackground result = new InventoryBackground("img/Object/"+ cake + ".png");
-                    addObject(result, 200, 100);
-                    removeText(375, 550);
-                    showText(score, 40, 10, 50, Color.BLACK);
+                } else {
+                    Inventory inv = new Inventory();
+                    OpeningScreen w =  new OpeningScreen();
+                    Mayflower.setWorld(w);
                 }
             }
         } else if (current != null) {

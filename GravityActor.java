@@ -44,6 +44,7 @@ public class GravityActor extends Actor {
                 if (a > 30)
                     isJumping = false;
             } else if (isBlocked()) {
+                // if standing on block
                 if (a == 0 || offTop) {
                     while (isBlocked()) {
                         setLocation(getX(), getY() - 1);

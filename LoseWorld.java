@@ -4,6 +4,9 @@ public class LoseWorld extends World {
         // show background
         setBackground("img/BG/loseworld.png");
         
+        InventoryBackground replayBtn = new InventoryBackground("img/Object/replay_button.png", 200, true);
+        addObject(replayBtn, 550, 350);
+                        
         // show dead cat
         String[] imgFiles = new String[10];
         for (int i = 0; i < imgFiles.length; i++) {
@@ -17,6 +20,18 @@ public class LoseWorld extends World {
     }
 
     public void act() {
-        
+        MouseInfo mInfo = Mayflower.getMouseInfo();
+        if (mInfo.getClickCount() == 1) {
+             Actor clicked = mInfo.getActor();
+             if (clicked instanceof InventoryBackground) {
+                 // if clicked the finish button
+                 InventoryBackground button = (InventoryBackground) clicked;
+                 if (button.isButton()) {
+                       Inventory inv = new Inventory();
+                       OpeningScreen w =  new OpeningScreen();
+                       Mayflower.setWorld(w);
+                 }
+                }
+            }
     }
 }

@@ -13,6 +13,7 @@ public class Inventory extends Actor {
         inventory = new ArrayList<String>();
         items = new ArrayList<InventoryItem>();
         hearts = new ArrayList<InventoryItem>();
+        health = 5;
     }
     
     public void act() { }
