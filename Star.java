@@ -14,10 +14,21 @@ public class Star extends Actor
         if(isTouching(MainCharacter.class) || isTouching(MazeMainCharacter.class)) {
             getWorld().removeObject(this);
             
-            if (nextWorld == "Level1")
-                Mayflower.setWorld(new Level1World());
+            World newWorld = null;
+            if (nextWorld == "Level1") 
+                newWorld = new Level1World();
             else if (nextWorld == "Level2")
-                Mayflower.setWorld(new Level3World());
+                newWorld = new Level2World();
+            else if (nextWorld == "Level3")
+                newWorld = new Level3World();
+            else if (nextWorld == "Win") { // "Win"  // for temp purposes
+                newWorld = new WinWorld(); //new WinWorld();
+            }
+            
+            if (newWorld != null) {
+                Mayflower.setWorld(newWorld);
+                Inventory.setWorld(newWorld);
+            }
         }
     }
 }

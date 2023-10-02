@@ -1,17 +1,28 @@
 import mayflower.*;
 
 public class MazeGravityActor extends Actor {
+    private boolean isFrozen;
+    
     public MazeGravityActor() {
     }
     
     public void act() {  
-        int fallSpeed = 3;
-        setLocation(getX(), getY() + fallSpeed);
-        for (int i = 0; i < fallSpeed; i++) {
-            if (isBlocked()) {
-                setLocation(getX(), getY() - 1);
+        if (!isFrozen) {
+            int fallSpeed = 3;
+            setLocation(getX(), getY() + fallSpeed);
+            for (int i = 0; i < fallSpeed; i++) {
+                if (isBlocked()) {
+                    setLocation(getX(), getY() - 1);
+                }
             }
         }
+    }
+    public void setFrozen(boolean isFrozen) {
+        this.isFrozen = isFrozen;
+    }
+    
+    public boolean isFrozen() {
+        return isFrozen;
     }
     
     public boolean isBlocked() {

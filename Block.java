@@ -9,7 +9,7 @@ public class Block extends Actor {
     
     public Block(int tile, int scale) {
         MayflowerImage block = new MayflowerImage("img/Tiles/"+ tile + ".png");
-        block.scale(100, 100); //scale, scale
+        block.scale(scale, scale);
         setImage(block);
     }
     
