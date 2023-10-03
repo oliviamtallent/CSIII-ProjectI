@@ -4,9 +4,7 @@ public class OpeningScreen extends World
 {
     private MainCharacter main;
     String[][] tiles;
-    public OpeningScreen()
-    {
-        //Mayflower.showBounds(true);
+    public OpeningScreen() {
         tiles = new String[31][46];
         
         // add background and instructions text

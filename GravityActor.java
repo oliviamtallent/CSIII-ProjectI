@@ -3,28 +3,26 @@ import mayflower.*;
 public class GravityActor extends Actor {
     private boolean isJumping;
     private String direction;
-    private int jumpStartX; // normalize x to 0
-    private int jumpStartY;
+    private int jumpStartX; // normalize x to start location
+    private int jumpStartY; // normalize y to start location
     private int x;
     private int ARC = 30; // vertex
     private int a;
-    private boolean offTop;
     private int prevY = 0;
+    private boolean freeze;
     
     public GravityActor() {
     }
     
-    public void act() {  
-        if (isJumping) {
+    public void act() {
+        outer: if (isJumping) {
             int y;
             
-            // if jump has not been cut short
+            // set y based on current x or cut off
             if (a == 0)
                 y = (x * x) - (ARC * x); // x^2 - 30x
-            else {
-                y = (x * x) - (2 * a * x) - (a * (ARC - (2 * a)));  
-                // x^2 - 2(cutoff)x - cutoff(30 - 2(cutoff))
-            }
+            else 
+                y = (x * x) - (2 * a * x) - (a * (ARC - (2 * a)));
             
             // direction x increment/decrement
             int moveX = 0;
@@ -32,35 +30,44 @@ public class GravityActor extends Actor {
                 moveX = -1;
             else
                 moveX = 1;
-            
-            // set x and y to next plot point
-            setLocation(getX() + moveX, y + jumpStartY);
-            
-            if (isBlockedTop(prevY, y) && a == 0) {
-                // blocked above and not already cutoff, set cutoff
-                a = x;
                 
-                // if jump arc already occurred stop jump and fall
-                if (a > 30)
-                    isJumping = false;
-            } else if (isBlocked()) {
-                // if standing on block
-                if (a == 0 || offTop) {
-                    while (isBlocked()) {
-                        setLocation(getX(), getY() - 1);
+            int diff = y - prevY;
+            for (int i = 0; i < Math.abs(diff); i++) {
+                // if past vertex or not (<0 --> before vertex)
+                if (diff < 0) {
+                    setLocation(getX(), getY() - 1);
+                    if (isBlocked()) {
+                        setLocation(getX(), getY() + 1);
+                        
+                        // if x is unchanged before being blocked --> fall
+                        if (direction == "left" && x > 30 || 
+                            direction == "right" && x <= 1) {
+                            isJumping = false;
+                            break outer;
+                        }
+                        
+                        // set break point to cut arc
+                        a = x - moveX;
+                        break outer;
                     }
-                    isJumping = false;
-                    a = 0;
-                    prevY = 0;
+                } else if (diff > 0) {
+                    // increase y and make sure it isn't blocked underneath
+                    setLocation(getX(), getY() + 1);
+                    if (isBlocked()) {
+                        setLocation(getX(), getY() - 1);
+                        isJumping = false;
+                        break outer;
+                    }
                 }
             }
             
-            // no longer hitting top barrier
-            if (!isBlockedTop(prevY, y) && a != 0) {
-                offTop = true;
+            // move X and make sure it hasn't been blocked
+            setLocation(getX() + moveX, getY());
+            if (isBlocked()) {
+                setLocation(getX() - moveX, getY());
+                isJumping = false;
             }
             
-            // increment/decrement x according to direction
             if (direction == "left")
                x--;
             else
@@ -86,18 +93,6 @@ public class GravityActor extends Actor {
         return false;
     }
     
-    public boolean isBlockedTop(int y1, int y2) {
-        if (isBlocked()) {
-            setLocation(getX(), getY() - Math.abs(y1 - y2));
-            if (isBlocked()) {
-                setLocation(getX(), getY() + Math.abs(y1 - y2));
-                return true;
-            }
-            setLocation(getX(), getY() + Math.abs(y1 - y2));
-        }
-        return false;
-    }
-    
     public void startJump(String direction) {
         this.direction = direction;
         if (direction == "left")
@@ -109,7 +104,6 @@ public class GravityActor extends Actor {
         jumpStartX = getX();
         jumpStartY = getY();
         a = 0;
-        offTop = false;
         prevY = 0;
         isJumping = true;
     }
