@@ -8,6 +8,4 @@ comment3.params=
 comment3.target=void\ buildWorld()
 comment4.params=
 comment4.target=NinjaEnemy\ getNinja1()
-comment5.params=
-comment5.target=NinjaEnemy\ getNinja2()
-numComments=6
+numComments=5

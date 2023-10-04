@@ -85,5 +85,30 @@ public class MainCharacter extends MoveableAnimatedActor {
     
     public void act() {
         super.act();
+        int catX = getX();
+        int catY = getY();
+        int catW = getWidth();
+        int catH = getHeight();
+        World w = getWorld();
+        
+        if(w instanceof Level3World)
+        {
+            Level3World world = (Level3World) getWorld();
+            int ninja1X = world.getNinja1().getX();
+            int ninja1Y = world.getNinja1().getY();
+            int ninjaW = world.getNinja1().getWidth();
+            int ninjaH = world.getNinja1().getHeight();
+
+     
+
+            if(world != null)
+            {
+                if(catX + 50 >= ninja1X && catY - 50 + catH <= ninja1Y)
+                {
+                    world.removeObject(world.getNinja1());
+                }
+            }   
+        }
+
     }
 }

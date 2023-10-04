@@ -27,15 +27,13 @@ public class Level3World extends World
 
     public void buildWorld()
     {
+        // adding a main character, ninja, and star
         main = new MainCharacter(80);
-        addObject(main, 25, 200);
+        addObject(main, 25, 400); // 300, 100
         
         ninja1 = new NinjaEnemy();
-        addObject(ninja1, 300, 400);
-
-        ninja2 = new NinjaEnemy();
-        addObject(ninja2, 550, 400);
-
+        addObject(ninja1, 100, 300); // maYBE make 400
+        
         star = new Star("Win");
         addObject(star, 700, 300);
         
@@ -66,14 +64,14 @@ public class Level3World extends World
             }
         } 
 
-        // 1, 3 | 6, 3 | 2, 2 | 3, 2 | 5, 2 |
-
-        // randomly place 2 strawberrys on any 5 of these blocks
+        //  2, 2 | 2, 3 | 2, 5 |
+        // randomly place 2 strawberrys on any 3 of the blocks above
+        
         int c1 = 0;
         while (true)
         {
             c1 = (int) (Math.random() * 6) + 1;
-            if(c1 == 1 || c1 == 2 || c1 == 3 || c1 == 5 || c1 == 6)
+            if( c1 == 2 || c1 == 3 || c1 == 5)
                 break;
             else
                 continue;
@@ -83,7 +81,7 @@ public class Level3World extends World
         while (true)
         {
             c2 = (int) (Math.random() * 6) + 1;
-            if(c2 == 1 || c2 == 2 || c2 == 3 || c2 == 5 || c2 == 6)
+            if(c2 == 2 || c2 == 3 || c2 == 5 )
             {
                 if(c1 == c2)
                     continue;
@@ -92,24 +90,20 @@ public class Level3World extends World
             }
         }
 
-        int r1 = 2; 
-        int r2 = 3;
-
+        
         if(c1 == 2 || c1 == 3 || c1 == 5)
-            tiles[r1][c1] = "strawberry";
-        else if(c1 == 1 || c1 == 6)
-            tiles[3][c1] = "strawberry";
+            tiles[2][c1] = "strawberry";
+       
         
         if(c2 == 2 || c2 == 3 || c2 == 5)
             tiles[2][c2] = "strawberry";
-        else if(c2 == 1 || c2 == 6)
-            tiles[r2][c2] = "strawberry";
-
+            
+    
         for(int r = 0; r < tiles.length; r++)
         {
             for(int c = 0; c < tiles[r].length; c++)
             {
-                int x = 100 * c; //700 - (100 * c);
+                int x = 100 * c; 
                 int y = 100 * r;
                 if(tiles[r][c].equals("strawberry"))
                 {
@@ -129,8 +123,5 @@ public class Level3World extends World
         return ninja1;
     }
 
-    public NinjaEnemy getNinja2()
-    {
-        return ninja2;
-    }
+
 }
