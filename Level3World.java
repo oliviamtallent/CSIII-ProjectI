@@ -29,10 +29,10 @@ public class Level3World extends World
     {
         // adding a main character, ninja, and star
         main = new MainCharacter(80);
-        addObject(main, 25, 400); // 300, 100
+        addObject(main, 25, 400); 
         
         ninja1 = new NinjaEnemy();
-        addObject(ninja1, 100, 300); // maYBE make 400
+        addObject(ninja1, 100, 300); 
         
         star = new Star("Win");
         addObject(star, 700, 300);
@@ -65,7 +65,7 @@ public class Level3World extends World
         } 
 
         //  2, 2 | 2, 3 | 2, 5 |
-        // randomly place 2 strawberrys on any 3 of the blocks above
+        // below randomly places 2 strawberrys on any 3 of the blocks above
         
         int c1 = 0;
         while (true)

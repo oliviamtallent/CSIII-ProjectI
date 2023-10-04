@@ -25,7 +25,7 @@ public class NinjaEnemy extends EnemyAnimatedActor {
     public void act() 
     {
         super.act();
-        // remove and reduce health if touching maincharacter
+        // reduce health if touching maincharacter and cooldown is true
         if (isTouching(MainCharacter.class) && !cooldown) 
         {
             World w = getWorld();
