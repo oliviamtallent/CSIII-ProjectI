@@ -35,7 +35,7 @@ public class NinjaEnemy extends EnemyAnimatedActor {
         }
         else if (!isTouching(MainCharacter.class) && cooldown) 
         {
-            // reset cooldown when character moves away so it can re-attack
+            // reset cooldown 
             cooldown = false;
         }
     }
